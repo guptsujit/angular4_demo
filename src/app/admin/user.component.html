@@ -1,0 +1,44 @@
+
+
+
+
+
+<div align="center">
+  
+
+</div>
+
+<table class="table" *ngIf="users">
+ 
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>Website</th>
+      <th>Gender</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor='let key of users'>
+      <tr>
+      <td>{{key.username}}</td>
+      <td>{{key.email}}</td>
+      <td>{{key.phone}}</td>
+      <td>{{key.state}}</td>
+      <td>{{key.zip}}</td> 
+      <td>{{key.website}}</td>
+      <td>{{key.gender}}</td>
+      <td>
+        <a class="main-link"   [routerLink] ="['/contactus', key.id]" class="btn btn-info">Update</a>
+        <button class="main-link"   (click) = "deleteUser(key.id,key)" class="btn btn-info">Delete</button>
+      </td>
+    </tr>
+    </ng-container>
+    
+  </tbody>
+  
+</table>

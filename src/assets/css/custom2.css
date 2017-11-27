@@ -1,0 +1,37 @@
+.size25{ font-size:25px;}
+.size18{ font-size:18px;}
+.m-t-30 { margin-top:30px;}
+.m-t-20 { margin-top:20px;}
+.m-t-6 { margin-top:6px;}
+.m-t-0{ margin-top:0px;}
+.map-images  { text-align:center;}
+.map-images  img{ display:inline-block; max-width:100%;}
+.logos-list { margin:0px; padding:0px; }
+.logos-list li{ list-style:none; width:50%; float:left; height:55px; margin-bottom:5px; padding-right:10px;}
+.spacialised_last h6 {color: #174b4e; font-size: 22px; font-weight: bold;}
+.press-room .re {color:#982632;}
+.press-room .panel-default {border-color: #ddd;}
+.press-room .panel-default .date-first {color: #1a7972; font-size: 16px;}
+.press-room .panel-group .panel {border-radius: 0px;}
+.press-room .panel-default .month {color: #1a7972; font-size: 16px; }
+.press-room .panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group { border-top: 0px solid #ddd;}
+.yellow-line { border-bottom: 1px solid #dedca8; padding: 15px 2px 10px; margin-bottom:20px;}
+.yellow-line span {color:#333;}
+.comment-img {height:70px; width:70px; border:1px solid #D8D6D7 !important; margin-top:10px;}
+.hot-topic .re {color:#982632;}
+.hot-topic h6 { color: #174b4e; font-size: 22px; font-weight: bold;}
+.hot-topic p {color: #000; font-size: 16px; text-align: justify;}
+.hot-topic .panel-default {border-color: #ddd;}
+.hot-topic .panel-default .date-first {color: #1a7972; font-size: 16px; margin-top:0px;}
+.hot-topic .panel-group .panel {border-radius: 0px;}
+.hot-topic .panel-default .month {color: #1a7972; font-size: 16px; }
+.hot-topic h2 { border-bottom: 1px solid #dedca8; padding: 0 0 20px;}
+.hot-topic .panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group { border-top: 0px solid #ddd;}
+.hot-topic button {margin-top:10px;}
+.hot-topic .btn-success {background-color: #982632; border-color: #982632; color: #fff; width:100px;} 
+.hot-topic .btn-success:hover{background-color: #802029; border-color: #802029; color: #fff; width:100px;}
+.hot-topic .comment-section textarea { border: 5px solid #ededed !important; border-radius: 0 !important;}
+.hot-topic .comment-user {font-family:HelveticaLT55Roman; font-size:16px; color:#1B7972;}
+.hot-topic .comment-user span{font-size:14px; color:#333;}
+.load-more {background-color:#F8F8F8; height:48px; border:1px solid #E4E2E9; text-align:center; padding:12px; margin-top:20px; }
+.load-more a {color:#8C8C8C !important;}
