@@ -9,6 +9,7 @@ export class Usermodel{
         zip:any;
         website:string;
         gender:string;
+        role :string;
         constructor() {
               this.id = 0;
               this.username = "";
@@ -19,6 +20,7 @@ export class Usermodel{
               this.zip = "";
               this.website = "";
               this.gender = "";
+              this.role = "";
              
         
         }

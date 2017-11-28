@@ -1,0 +1,45 @@
+
+<div class="container">
+  <form class="well form-horizontal" action=" " method="post" id="login_form" #formData="ngForm" (ngSubmit)="processLogin(formData)">
+<div class="form-group">
+  <label class="col-md-4 control-label">E-Mail</label>
+  <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+      <input name="email" [(ngModel)]="model.email" #useremail="ngModel" ngModel placeholder="E-Mail Address" class="form-control"
+        type="text" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+      <div *ngIf="useremail.invalid && (useremail.dirty || useremail.touched || formData.submitted)">
+        <span class="help-block" *ngIf="useremail.errors.required">Email is required</span>
+        <span class="help-block" *ngIf="useremail.errors.pattern">Invalid email</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Password</label>
+  <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+      <input name="password" [(ngModel)]="model.password" #userpassword="ngModel" ngModel placeholder="Password" class="form-control"
+        type="password" required >
+      <div *ngIf="userpassword.invalid && (userpassword.dirty || userpassword.touched || formData.submitted)">
+        <span class="help-block" *ngIf="userpassword.errors.required">Password is required</span>
+        
+      </div>
+      <span class="help-block" *ngIf="errorMessage">{{errorMessage}}</span>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button type="submit" class="btn btn-warning">login <span class="glyphicon glyphicon-send"></span></button>
+  </div>
+</div>
+</form>
+</div>

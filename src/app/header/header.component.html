@@ -5,8 +5,9 @@
   </nav>
   <a href="index.html" class="logo">intensify</a>
   <nav class="right">
-    <a routerLink = '/login' class="button alt">Log in</a>
-    <a routerLink = '/dashboard' class="button alt">Dashboard</a>
+    <a routerLink = '/login' class="button alt" *ngIf="!userSession">Log in</a>
+    <a (click) = 'logout()' class="button alt" *ngIf="userSession">Log Out</a>
+    <a routerLink = '/dashboard' *ngIf="userSession" class="button alt">Dashboard</a>
   </nav>
 </header>
 
