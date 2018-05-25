@@ -1,0 +1,205 @@
+ {{empmodel | json}}
+<div class="container">
+  <form class="well form-horizontal" action=" " method="post" id="contact_form" #employeeForm="ngForm" (ngSubmit)="processEmployeeForm(employeeForm)">
+    <fieldset>
+
+
+      <div class="form-group" [class.has-error]="fullnameControl.invalid && fullnameControl.touched" [class.has-success]="fullnameControl.valid && fullnameControl.touched">
+        <label class="col-md-4 control-label">Fullname</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <input [(ngModel)]="empmodel.fullname" name="fullname" required placeholder="Full Name" class="form-control" type="text"
+              #fullnameControl="ngModel">
+
+          </div>
+          <span class="help-block" *ngIf="fullnameControl.invalid && fullnameControl.touched">fullname is required</span>
+          <div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <!--Password and confirm password add here -->
+      {{passwordGroupControl.errors | json}}
+      {{passwordControl.errors | json}}
+      <div ngModelGroup #passwordGroupControl ="ngModelGroup" appConfirmEqualValidator 
+      [class.has-error]="passwordGroupControl.errors?.notEqual" [class.has-success]="passwordGroupControl.valid"
+      >
+        <div class="form-group" [class.has-error]="passwordControl.invalid && passwordControl.touched" [class.has-success]="passwordControl.valid">
+          <label class="col-md-4 control-label">Password</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user"></i>
+              </span>
+              <input [(ngModel)]="password" name="password" required placeholder="Password" class="form-control" type="text" #passwordControl="ngModel">
+
+            </div>
+            <span class="help-block" *ngIf="passwordControl.invalid && passwordControl.touched">Password is required</span>
+            <div>
+
+            </div>
+          </div>
+        </div>
+        <div class="form-group" [class.has-error]="confirmPasswordControl.invalid && confirmPasswordControl.touched" [class.has-success]="confirmPasswordControl.valid">
+          <label class="col-md-4 control-label">Confirm Password</label>
+          <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user"></i>
+              </span>
+              <input [(ngModel)]="confirmPassword" name="confirmPassword" required placeholder="Confirm Password" class="form-control"
+                type="text" #confirmPasswordControl="ngModel">
+
+            </div>
+            <span class="help-block" *ngIf="confirmPasswordControl.invalid && confirmPasswordControl.touched">Confirm Password is required</span>
+            <span class="help-block" *ngIf="passwordGroupControl.errors?.notEqual">Password and confirm password does not match</span>
+            <div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Password and confirm password end here -->
+
+      <div class="form-group" [class.has-error]="emailControl.invalid" [class.has-success]="emailControl.valid && emailControl.touched">
+        <label class="col-md-4 control-label">Email</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <input [(ngModel)]="empmodel.email" name="email" placeholder="email" class="form-control" type="text" #emailControl="ngModel"
+              [required]="contactprefControl.value=='email'">
+
+          </div>
+          <span class="help-block" *ngIf="emailControl.invalid">Email is required</span>
+        </div>
+      </div>
+
+      <div class="form-group" [class.has-error]="phonenoControl.invalid" [class.has-success]="phonenoControl.valid && emailControl.touched">
+        <label class="col-md-4 control-label">Phone No</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <input name="phoneno" [(ngModel)]="phonenoControl.phoneno" placeholder="Phone No" class="form-control" type="text" #phonenoControl="ngModel"
+              [required]="contactprefControl.value=='phone'">
+
+          </div>
+          <span class="help-block" *ngIf="phonenoControl.invalid">Phone no is required</span>
+        </div>
+      </div>
+
+      <div class="form-group" [class.has-error]="contactprefControl.invalid && contactprefControl.touched">
+        <label class="col-md-4 control-label">Contact Preference</label>
+        <div class="col-md-4">
+          <div class="radio">
+            <label>
+              <input type="radio" [(ngModel)]="empmodel.copntactpreference" name="copntactpreference" value="email" required #contactprefControl="ngModel"
+              /> Email
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" [(ngModel)]="empmodel.copntactpreference" name="copntactpreference" value="phone" required #contactprefControl="ngModel"
+              /> Phone No
+            </label>
+
+          </div>
+          <span class="help-block" *ngIf="contactprefControl.invalid && contactprefControl.touched">Contact Preference is required</span>
+          {{contactprefControl.value}}
+        </div>
+      </div>
+
+
+
+
+
+      <!-- radio checks -->
+      <div class="form-group" [class.has-error]="genderControl.invalid && genderControl.touched" [class.has-success]="genderControl.valid && genderControl.touched">
+        <label class="col-md-4 control-label">Select Gender</label>
+        <div class="col-md-4">
+          <div class="radio">
+            <label>
+              <input type="radio" [(ngModel)]="empmodel.gender" name="gender" value="male" required #genderControl="ngModel" /> Male
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" [(ngModel)]="empmodel.gender" name="gender" value="female" required #genderControl="ngModel" /> Female
+            </label>
+
+          </div>
+          <span class="help-block" *ngIf="genderControl.invalid && genderControl.touched">Gender is required</span>
+        </div>
+      </div>
+
+      <div class="form-group" [class.has-error]="isactiveControl.touched && isactiveControl.invalid" [class.has-success]="isactiveControl.valid">
+        <label class="col-md-4 control-label">Is Active</label>
+        <div class="col-md-4">
+          <div class="checkbox-inline">
+            <label>
+              <input type="checkbox" [(ngModel)]="empmodel.isactive" name="isactive" value="1" required #isactiveControl="ngModel" required/> Is Active
+            </label>
+          </div>
+          <span class="help-block" *ngIf="isactiveControl.invalid && isactiveControl.touched">Is active is required</span>
+        </div>
+      </div>
+
+
+      {{departmentControl.errors | json}} {{isactiveControl.errors | json}}
+      <div class="form-group" [class.has-error]="departmentControl.touched && departmentControl.invalid && departmentControl.errors?.defaultSelected"
+        [class.has-success]="departmentControl.valid">
+        <label class="col-md-4 control-label">Department</label>
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <select appSelectListValidator name="department" [(ngModel)]="empmodel.department" class="form-control selectpicker" require
+              #departmentControl="ngModel">
+              <option value="0">Select Department</option>
+              <option *ngFor="let dep of department" [value]="dep.id">{{dep.name}}</option>
+            </select>
+
+          </div>
+          <span class="help-block" *ngIf="departmentControl.invalid && departmentControl.touched && departmentControl.errors?.defaultSelected">Department is required</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label">Date Of Birth</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <input name="dob" [(ngModel)]="empmodel.dob" placeholder="dob" bsDatepicker class="form-control" type="text">
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+          <button type="submit" class="btn btn-warning">Send
+            <span class="glyphicon glyphicon-send"></span>
+          </button>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+
+</div>
+<div>
