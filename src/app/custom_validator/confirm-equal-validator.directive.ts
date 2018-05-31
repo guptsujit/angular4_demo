@@ -11,6 +11,7 @@ export class ConfirmEqualValidatorDirective implements Validator {
   validate(passwordGroup:AbstractControl):{[key: string]: any}{
     //var obj = passwordGroup.get('password');
   //  console.log(obj);
+  if(passwordGroup.get('password')!=null && passwordGroup.get('confirmPassword')!=null){
   var password = passwordGroup.get('password').value;
   var confirmPassword = passwordGroup.get('confirmPassword').value;
    if(password && confirmPassword && password!==confirmPassword){
@@ -18,5 +19,6 @@ export class ConfirmEqualValidatorDirective implements Validator {
    }
    return null;
   }
+}
 
 }

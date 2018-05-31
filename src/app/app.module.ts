@@ -13,11 +13,21 @@ import {FormsModule } from '@angular/forms';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SelectListValidatorDirective } from './custom_validator/select-list-validator.directive';
 import { ConfirmEqualValidatorDirective } from './custom_validator/confirm-equal-validator.directive';
+import { CreateEmployeeCanDeactivateGuardServiceGuard } from './employee/create-employee-can-deactivate-guard-service.guard';
+import { EmployeeListComponent } from './employee/employee-list.component';
+import { EmployeeService } from './employee/employee.service';
+import { ViewEmployeeComponent } from './employee/view-employee.component';
 
 const appRoute: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
-  { path: 'create', component: CreateEmployeeComponent },
+  { path: 'employeelist', component: EmployeeListComponent },
+  { path: 'viewemployee/:id', component: ViewEmployeeComponent },
+  { 
+    path: 'create', component: CreateEmployeeComponent,
+    canDeactivate:[CreateEmployeeCanDeactivateGuardServiceGuard] 
+   
+  },
   { path: '*', component: NotfoundComponent },
 ]
 @NgModule({
@@ -30,14 +40,16 @@ const appRoute: Routes = [
     NotfoundComponent,
     CreateEmployeeComponent,
     SelectListValidatorDirective,
-    ConfirmEqualValidatorDirective
+    ConfirmEqualValidatorDirective,
+    EmployeeListComponent,
+    ViewEmployeeComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoute),FormsModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot() 
   ],
-  providers: [],
+  providers: [CreateEmployeeCanDeactivateGuardServiceGuard,EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

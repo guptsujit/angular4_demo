@@ -1,0 +1,42 @@
+
+<div align="center">
+  
+<input type="text" [(ngModel)]="searchTxt">
+</div>
+
+<table class="table">
+ 
+  <thead>
+    <tr>
+      <th>Fullname</th>
+      <th>Gender</th>
+      <th>Email</th>
+      <th>Phone No</th>
+      <th>Copntact Preference</th>
+      <th>Date of Birth</th>
+      <th>Department</th>
+      <th>Is Active</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor='let employee of employees'>
+      <tr  [class.changecolor]="viewempid===employee.id">
+      <td>{{employee.fullname}}</td>
+      <td>{{employee.gender}}</td>
+      <td>{{employee.email}}</td>
+      <td>{{employee.phoneno}}</td>
+      <td>{{employee.copntactpreference}}</td>
+      <td>{{employee.dob}}</td> 
+      <td>{{employee.department}}</td>
+      <td>{{employee.isactive}}</td>
+      <td>
+        <a class="main-link btn btn-info" [routerLink]="['/viewemployee',employee.id]"> View Employee </a> &nbsp;
+        <button class="main-link"   (click) = "deleteUser()" class="btn btn-info">Delete</button>
+      </td>
+    </tr>
+    </ng-container>
+    
+  </tbody>
+  
+</table>

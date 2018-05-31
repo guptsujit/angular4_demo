@@ -1,6 +1,6 @@
  {{empmodel | json}}
 <div class="container">
-  <form class="well form-horizontal" action=" " method="post" id="contact_form" #employeeForm="ngForm" (ngSubmit)="processEmployeeForm(employeeForm)">
+  <form class="well form-horizontal" action=" " method="post" id="contact_form" #employeeForm="ngForm" (ngSubmit)="processEmployeeForm()">
     <fieldset>
 
 
@@ -89,7 +89,7 @@
             <span class="input-group-addon">
               <i class="glyphicon glyphicon-user"></i>
             </span>
-            <input name="phoneno" [(ngModel)]="phonenoControl.phoneno" placeholder="Phone No" class="form-control" type="text" #phonenoControl="ngModel"
+            <input name="phoneno" [(ngModel)]="empmodel.phoneno" placeholder="Phone No" class="form-control" type="text" #phonenoControl="ngModel"
               [required]="contactprefControl.value=='phone'">
 
           </div>

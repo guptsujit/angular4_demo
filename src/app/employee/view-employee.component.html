@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Employee Detail</h2> 
+  <a class="main-link btn btn-info" [routerLink]="['/employeelist',{id:employee.id}]"> Back to List </a> &nbsp;         
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Fullname</th>
+        <th>Gender</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Copntact Preference</th>
+        <th>Department</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{employee.fullname}}</td>
+        <td>{{employee.gender}}</td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.phoneno}}</td>
+        <td>{{employee.copntactpreference}}</td>
+        <td>{{employee.department}}</td>
+      </tr>
+      <button class="main-link"   (click) = "viewNextEmployee()" class="btn btn-info">View Next Employee</button>
+    </tbody>
+  </table>
+</div>
