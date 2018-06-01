@@ -17,6 +17,7 @@ import { CreateEmployeeCanDeactivateGuardServiceGuard } from './employee/create-
 import { EmployeeListComponent } from './employee/employee-list.component';
 import { EmployeeService } from './employee/employee.service';
 import { ViewEmployeeComponent } from './employee/view-employee.component';
+import { EmployeeFilterPipe } from './employee/employee-filter.pipe';
 
 const appRoute: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -42,7 +43,8 @@ const appRoute: Routes = [
     SelectListValidatorDirective,
     ConfirmEqualValidatorDirective,
     EmployeeListComponent,
-    ViewEmployeeComponent
+    ViewEmployeeComponent,
+    EmployeeFilterPipe
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoute),FormsModule,

@@ -1,7 +1,9 @@
 
-<div align="center">
+<div align="center" style="padding-top:20px">
   
 <input type="text" [(ngModel)]="searchTxt">
+&nbsp;
+<button class="main-link"   (click) = "changeEmployeeName()" class="btn btn-info">Change Employee Name</button>
 </div>
 
 <table class="table">
@@ -20,7 +22,7 @@
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor='let employee of employees'>
+    <ng-container *ngFor='let employee of filteredEmployees | employeeFilter:searchTxt'>
       <tr  [class.changecolor]="viewempid===employee.id">
       <td>{{employee.fullname}}</td>
       <td>{{employee.gender}}</td>
