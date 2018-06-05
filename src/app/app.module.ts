@@ -14,6 +14,7 @@ import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SelectListValidatorDirective } from './custom_validator/select-list-validator.directive';
 import { ConfirmEqualValidatorDirective } from './custom_validator/confirm-equal-validator.directive';
 import { CreateEmployeeCanDeactivateGuardServiceGuard } from './employee/create-employee-can-deactivate-guard-service.guard';
+import { EmployeeListResolveServiceGuard } from './employee/employee-list-resolve-service.guard';
 import { EmployeeListComponent } from './employee/employee-list.component';
 import { EmployeeService } from './employee/employee.service';
 import { ViewEmployeeComponent } from './employee/view-employee.component';
@@ -22,7 +23,9 @@ import { EmployeeFilterPipe } from './employee/employee-filter.pipe';
 const appRoute: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
-  { path: 'employeelist', component: EmployeeListComponent },
+  { path: 'employeelist', component: EmployeeListComponent,
+    resolve : {listofemployee : EmployeeListResolveServiceGuard}
+  },
   { path: 'viewemployee/:id', component: ViewEmployeeComponent },
   { 
     path: 'create', component: CreateEmployeeComponent,
@@ -47,11 +50,11 @@ const appRoute: Routes = [
     EmployeeFilterPipe
   ],
   imports: [
-    BrowserModule, RouterModule.forRoot(appRoute),FormsModule,
+    BrowserModule, RouterModule.forRoot(appRoute,{enableTracing:true}),FormsModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot() 
   ],
-  providers: [CreateEmployeeCanDeactivateGuardServiceGuard,EmployeeService],
+  providers: [CreateEmployeeCanDeactivateGuardServiceGuard,EmployeeService,EmployeeListResolveServiceGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

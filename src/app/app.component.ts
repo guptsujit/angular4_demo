@@ -1,4 +1,6 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Event, Router, NavigationStart, NavigationEnd } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -6,7 +8,21 @@ import { Component,Input } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
-  aboutus : string = "About Our Team";
+  showLoaderIndicator = true;
+  aboutus: string = "About Our Team";
+  constructor(private _router: Router) {
+    this._router.events.subscribe((routerEvent: Event) => {
+      if (routerEvent instanceof NavigationStart) {
+        if (routerEvent.url == '/employeelist') {
+          this.showLoaderIndicator = true;
+        } else {
+          this.showLoaderIndicator = false;
+        }
 
+      }
+      if (routerEvent instanceof NavigationEnd) {
+        this.showLoaderIndicator = false;
+      }
+    });
+  }
 }

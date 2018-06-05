@@ -192,8 +192,12 @@
       <div class="form-group">
         <label class="col-md-4 control-label"></label>
         <div class="col-md-4">
-          <button type="submit" class="btn btn-warning">Send
-            <span class="glyphicon glyphicon-send"></span>
+          <button type="submit" class="btn btn-warning"  [class]="classesToApply">Submit
+            <span class="glyphicon glyphicon-send" [ngClass] = "addOrMultipleClasses()"></span>
+          </button>
+          &nbsp;
+          <button type="button" class="btn btn-warning" [style.font-size.px]="styleToApply">Cancel
+            <span class="glyphicon glyphicon-send" [ngStyle] ="addOrMultipleStyle()"></span>
           </button>
         </div>
       </div>

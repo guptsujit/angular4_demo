@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from './employee.service';
 import { Employee } from '../models/employee-model';
 import { ActivatedRoute } from '@angular/router';
+import { EmployeeListResolveServiceGuard } from '../employee/employee-list-resolve-service.guard';
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -12,7 +13,10 @@ export class EmployeeListComponent implements OnInit {
   viewempid: number;
   private _searchTxt: string;
   filteredEmployees: Employee[];
-  constructor(private _employeeService: EmployeeService, private _route: ActivatedRoute) { }
+  constructor(private _employeeService: EmployeeService, private _route: ActivatedRoute,private _resolveGuard:EmployeeListResolveServiceGuard) { 
+    this.employees = this._route.snapshot.data['listofemployee'];
+    this.filteredEmployees = this.employees;
+  }
 
   ngOnInit() {
     //this.viewempid = +this._route.snapshot.paramMap.get('id');
@@ -25,7 +29,7 @@ export class EmployeeListComponent implements OnInit {
     }*/
 
     //observable approach
-    this._employeeService.getEmployees().subscribe((employess) => {
+    /*this._employeeService.getEmployees().subscribe((employess) => {
       this.employees = employess;
       this._route.queryParamMap.subscribe((queryParam) => {
         if (queryParam.has('searchTxt')) {
@@ -34,8 +38,8 @@ export class EmployeeListComponent implements OnInit {
           this.filteredEmployees = this.employees;
         }
       })
-    });
-   
+    });*/
+
 
   }
   changeEmployeeName() {
