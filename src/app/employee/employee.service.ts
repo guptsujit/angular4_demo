@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../models/employee-model';
-
+import { Observable,of} from 'rxjs';
+import {delay } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -40,8 +41,10 @@ export class EmployeeService {
   ];
   constructor() { }
 
-  getEmployees(): Employee[] {
-    return this.epmloyees;
+  getEmployees(): Observable<Employee[]>{
+    return of(this.epmloyees).pipe(delay(1000));
+ 
+    
   }
   save(employee: Employee): void {
     this.epmloyees.push(employee);

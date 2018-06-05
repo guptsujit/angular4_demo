@@ -1,7 +1,7 @@
 
 <div align="center" style="padding-top:20px">
   
-<input type="text" [(ngModel)]="searchTxt">
+<input type="text" [(ngModel)]="SearchTerm">
 &nbsp;
 <button class="main-link"   (click) = "changeEmployeeName()" class="btn btn-info">Change Employee Name</button>
 </div>
@@ -22,7 +22,7 @@
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor='let employee of filteredEmployees | employeeFilter:searchTxt'>
+    <ng-container *ngFor='let employee of filteredEmployees'>
       <tr  [class.changecolor]="viewempid===employee.id">
       <td>{{employee.fullname}}</td>
       <td>{{employee.gender}}</td>
@@ -33,8 +33,8 @@
       <td>{{employee.department}}</td>
       <td>{{employee.isactive}}</td>
       <td>
-        <a class="main-link btn btn-info" [routerLink]="['/viewemployee',employee.id]"> View Employee </a> &nbsp;
-        <button class="main-link"   (click) = "deleteUser()" class="btn btn-info">Delete</button>
+        <a class="main-link btn btn-info" [routerLink]="['/viewemployee',employee.id]" [queryParams]="{'searchTxt':SearchTerm}"> View Employee </a> &nbsp;
+        <button class="main-link"   (click) = "deleteUser(employee.id)" class="btn btn-info">Delete</button>
       </td>
     </tr>
     </ng-container>

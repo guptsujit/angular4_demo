@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Employee Detail</h2> 
-  <a class="main-link btn btn-info" [routerLink]="['/employeelist',{id:employee.id}]"> Back to List </a> &nbsp;         
+  <a class="main-link btn btn-info" [routerLink]="['/employeelist',{id:employee.id}]" queryParamsHandling ="preserve"> Back to List </a> &nbsp;         
   <table class="table table-hover">
     <thead>
       <tr>
@@ -21,7 +21,7 @@
         <td>{{employee.copntactpreference}}</td>
         <td>{{employee.department}}</td>
       </tr>
-      <button class="main-link"   (click) = "viewNextEmployee()" class="btn btn-info">View Next Employee</button>
+      <button class="main-link"   (click) = "viewNextEmployee()" class="btn btn-info" >View Next Employee</button>
     </tbody>
   </table>
 </div>
