@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Event, Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Event, Router, NavigationStart, NavigationEnd ,NavigationCancel} from '@angular/router';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class AppComponent {
         }
 
       }
-      if (routerEvent instanceof NavigationEnd) {
+      if (routerEvent instanceof NavigationEnd || routerEvent instanceof NavigationCancel) {
         this.showLoaderIndicator = false;
       }
     });

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -52,7 +52,7 @@ const appRoute: Routes = [
   imports: [
     BrowserModule, RouterModule.forRoot(appRoute,{enableTracing:true}),FormsModule,
     BsDatepickerModule.forRoot(),
-    DatepickerModule.forRoot() 
+    DatepickerModule.forRoot(),HttpClientModule 
   ],
   providers: [CreateEmployeeCanDeactivateGuardServiceGuard,EmployeeService,EmployeeListResolveServiceGuard],
   bootstrap: [AppComponent]

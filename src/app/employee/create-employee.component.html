@@ -1,5 +1,9 @@
- {{empmodel | json}}
+
 <div class="container">
+
+<div class="alert alert-danger" *ngIf='signUpFailed'>
+    {{signUpFailed}}
+  </div>
   <form class="well form-horizontal" action=" " method="post" id="contact_form" #employeeForm="ngForm" (ngSubmit)="processEmployeeForm()">
     <fieldset>
 

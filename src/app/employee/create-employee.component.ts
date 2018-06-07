@@ -4,7 +4,7 @@ import { Department } from '../models/department-model';
 import { Employee } from '../models/employee-model';
 import { EmployeeService } from './employee.service';
 import { Router } from '@angular/router';
-
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-create-employee',
@@ -44,14 +44,28 @@ export class CreateEmployeeComponent implements OnInit {
   addStyle : boolean = true;
   //styleToApply : string = "bold";
   styleToApply:string  = this.addStyle ? "30" : "20";
+  signUpFailed : string = "";
   constructor(private _employeeService: EmployeeService, private _router: Router) { }
 
   ngOnInit() {
 
   }
   processEmployeeForm() {
-    this._employeeService.save(this.empmodel);
-    this._router.navigate(['/employeelist']);
+    this._employeeService.save(this.empmodel).subscribe((response)=>{
+      this._router.navigate(['/employeelist']);
+    },(error:HttpErrorResponse)=>{
+      this.signUpFailed = "Something went wrong. Please try again later";
+      // below code represent more information about error.We can also use this
+      /*if (error.error instanceof ErrorEvent) {
+        //A client-side or network error occurred.				 
+        console.log('An error occurred:', error.error.message);
+      } else {
+        //Backend returns unsuccessful response codes such as 404, 500 etc.				 
+        console.log('Backend returned status code: ', error.status);
+        console.log('Response body:', error.error);
+      }*/
+    })
+    
   }
   // We use ngClass directive to add or remove multiple css classes on template
   addOrMultipleClasses(){
