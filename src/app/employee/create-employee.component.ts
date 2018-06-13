@@ -50,8 +50,9 @@ export class CreateEmployeeComponent implements OnInit {
   ngOnInit() {
 
   }
-  processEmployeeForm() {
-    this._employeeService.save(this.empmodel).subscribe((response)=>{
+  processEmployeeForm(empForm:NgForm) {
+    let formdata = empForm.value;
+    this._employeeService.save(formdata).subscribe((response)=>{
       this._router.navigate(['/employeelist']);
     },(error:HttpErrorResponse)=>{
       this.signUpFailed = "Something went wrong. Please try again later";
@@ -65,7 +66,7 @@ export class CreateEmployeeComponent implements OnInit {
         console.log('Response body:', error.error);
       }*/
     })
-    
+    //formdata.reset();
   }
   // We use ngClass directive to add or remove multiple css classes on template
   addOrMultipleClasses(){

@@ -5,7 +5,9 @@
 &nbsp;
 <button class="main-link"   (click) = "changeEmployeeName()" class="btn btn-info">Change Employee Name</button>
 </div>
-
+<div class="alert alert-danger" *ngIf="deleteMessage">
+  {{deleteMessage}}
+</div>
 <table class="table">
  
   <thead>

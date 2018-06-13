@@ -15,6 +15,7 @@ import { SelectListValidatorDirective } from './custom_validator/select-list-val
 import { ConfirmEqualValidatorDirective } from './custom_validator/confirm-equal-validator.directive';
 import { CreateEmployeeCanDeactivateGuardServiceGuard } from './employee/create-employee-can-deactivate-guard-service.guard';
 import { EmployeeListResolveServiceGuard } from './employee/employee-list-resolve-service.guard';
+import { EmpployeeDetailGuardServiceGuard } from './employee/empployee-detail-guard-service.guard';
 import { EmployeeListComponent } from './employee/employee-list.component';
 import { EmployeeService } from './employee/employee.service';
 import { ViewEmployeeComponent } from './employee/view-employee.component';
@@ -26,13 +27,16 @@ const appRoute: Routes = [
   { path: 'employeelist', component: EmployeeListComponent,
     resolve : {listofemployee : EmployeeListResolveServiceGuard}
   },
-  { path: 'viewemployee/:id', component: ViewEmployeeComponent },
+  { path: 'viewemployee/:id', component: ViewEmployeeComponent,
+   canActivate:[EmpployeeDetailGuardServiceGuard] 
+ },
   { 
     path: 'create', component: CreateEmployeeComponent,
     canDeactivate:[CreateEmployeeCanDeactivateGuardServiceGuard] 
    
   },
-  { path: '*', component: NotfoundComponent },
+  { path: 'notfound', component: NotfoundComponent },
+  { path: '**', redirectTo: '/notfound', pathMatch: 'full'},
 ]
 @NgModule({
   declarations: [
@@ -50,11 +54,15 @@ const appRoute: Routes = [
     EmployeeFilterPipe
   ],
   imports: [
-    BrowserModule, RouterModule.forRoot(appRoute,{enableTracing:true}),FormsModule,
+    BrowserModule, RouterModule.forRoot(appRoute),FormsModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),HttpClientModule 
   ],
-  providers: [CreateEmployeeCanDeactivateGuardServiceGuard,EmployeeService,EmployeeListResolveServiceGuard],
+  providers: [CreateEmployeeCanDeactivateGuardServiceGuard,
+             EmployeeService,EmployeeListResolveServiceGuard,
+             EmpployeeDetailGuardServiceGuard,
+
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

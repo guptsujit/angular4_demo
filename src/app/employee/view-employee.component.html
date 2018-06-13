@@ -1,4 +1,8 @@
-<div class="container">
+
+<div class="alert alert-danger" *ngIf="employeeNotExist">
+  {{employeeNotExist}}
+</div>
+<div class="container" *ngIf="employee">
   <h2>Employee Detail</h2> 
   <a class="main-link btn btn-info" [routerLink]="['/employeelist',{id:employee.id}]" queryParamsHandling ="preserve"> Back to List </a> &nbsp;         
   <table class="table table-hover">

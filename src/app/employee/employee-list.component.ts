@@ -13,7 +13,9 @@ export class EmployeeListComponent implements OnInit {
   viewempid: number;
   private _searchTxt: string;
   filteredEmployees: Employee[];
-  constructor(private _employeeService: EmployeeService, private _route: ActivatedRoute,private _resolveGuard:EmployeeListResolveServiceGuard) { 
+
+  deleteMessage: string = '';
+  constructor(private _employeeService: EmployeeService, private _route: ActivatedRoute, private _resolveGuard: EmployeeListResolveServiceGuard) {
     this.employees = this._route.snapshot.data['listofemployee'];
     this.filteredEmployees = this.employees;
   }
@@ -67,7 +69,20 @@ export class EmployeeListComponent implements OnInit {
     return this.employees.filter((employee) => employee.fullname.toLocaleLowerCase().indexOf(searchstr.toLocaleLowerCase()) !== -1);
   }
   deleteUser(empId: number) {
+    this._employeeService.deleteEmployee(empId).subscribe((response) => {
+      if (response.success) {
+        this.deleteMessage = "Employee deleted successfully";
+      } else {
+        this.deleteMessage = "Employee deletion failed";
+      }
+    }, (error) => {
+      this.deleteMessage = "Something went wrong. Please try again later";
+    })
 
+    for (var i = 0; i < this.employees.length; i++) {
+      if (this.employees[i].id === empId) {
+        this.employees.splice(i, 1);
+      }
+    }
   }
-
 }

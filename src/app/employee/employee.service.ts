@@ -47,6 +47,7 @@ export class EmployeeService {
       //'Authorization': 'my-auth-token'
     })
   }
+  allemployee:Employee[];
   constructor(private _httpClient:HttpClient) { }
 
   getEmployees(): Observable<Employee[]>{
@@ -56,12 +57,14 @@ export class EmployeeService {
   }
   save(employee: Employee): Observable<any> {
     let saveurl = "http://localhost/emp_api/db.php?action=add_emp";
-
     return this._httpClient.post(saveurl,employee,this.httpOptions);
-    //this.epmloyees.push(employee);
   }
-  getEmployeeDetail(employeeid: number): Employee {
-   return this.epmloyees.find((obj:Employee)=>obj.id===employeeid);
-    
+  getEmployeeDetail(employeeid: number): Observable<Employee> {
+    let url = "http://localhost/emp_api/db.php?action=get_emp_detail&id="+employeeid;
+    return this._httpClient.get<Employee>(url,this.httpOptions);
+  }
+  deleteEmployee(employeeid: number):Observable<{success:1|0}>{
+    let url = "http://localhost/emp_api/db.php?action=delete_emp&id="+employeeid;
+    return this._httpClient.delete<{success:1|0}>(url,this.httpOptions);
   }
 }
