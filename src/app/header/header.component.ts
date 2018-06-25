@@ -1,5 +1,6 @@
-import { Component, OnInit,Input } from '@angular/core';
-
+import { Component, OnInit,Input,OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,9 +9,19 @@ import { Component, OnInit,Input } from '@angular/core';
 export class HeaderComponent implements OnInit {
 @Input()
 aboutus : string;
-  constructor() { }
+authListerSub: Subscription;
+userisAuthenticated: boolean = false;
+  constructor(private _authService:AuthService) { }
 
   ngOnInit() {
+    this.authListerSub = this._authService.getAuthStatusListener().subscribe((isAuthenticated)=>{
+      this.userisAuthenticated = isAuthenticated;
+    });
   }
-
+  ngOnDestroy() {
+    this.authListerSub.unsubscribe();
+  }
+  logout(){
+    this._authService.logout();
+  }
 }

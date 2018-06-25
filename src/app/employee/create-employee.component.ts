@@ -4,7 +4,7 @@ import { Department } from '../models/department-model';
 import { Employee } from '../models/employee-model';
 import { EmployeeService } from './employee.service';
 import { Router } from '@angular/router';
-import {HttpErrorResponse} from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-employee',
@@ -30,31 +30,33 @@ export class CreateEmployeeComponent implements OnInit {
     copntactpreference: '',
     dob: null,
     department: '0',
-    isactive: false
-
+    isactive: false,
+    profileImage : null
   };
-  addClasses : boolean = true;
+  addClasses: boolean = true;
   //classesToApply:string  = "btn btn-info"; //will add class btn btn-info and and will remove all existing css class
-  classesToApply:string  = this.addClasses ? "btn btn-info" : "btn btn-primary"; // will add class and will keep existing css class
+  classesToApply: string = this.addClasses ? "btn btn-info" : "btn btn-primary"; // will add class and will keep existing css class
 
-  applyBoldClass :boolean = true;
-  applyItalicClass : boolean = false;
-  applyNormalClass : boolean = true;
+  applyBoldClass: boolean = true;
+  applyItalicClass: boolean = false;
+  applyNormalClass: boolean = true;
 
-  addStyle : boolean = true;
+  addStyle: boolean = true;
   //styleToApply : string = "bold";
-  styleToApply:string  = this.addStyle ? "30" : "20";
-  signUpFailed : string = "";
+  styleToApply: string = this.addStyle ? "30" : "20";
+  signUpFailed: string = "";
+  fileToUpload: File = null;
   constructor(private _employeeService: EmployeeService, private _router: Router) { }
 
   ngOnInit() {
 
   }
-  processEmployeeForm(empForm:NgForm) {
+  processEmployeeForm(empForm: NgForm) {
     let formdata = empForm.value;
-    this._employeeService.save(formdata).subscribe((response)=>{
+    empForm.resetForm();
+    this._employeeService.save(formdata).subscribe((response) => {
       this._router.navigate(['/employeelist']);
-    },(error:HttpErrorResponse)=>{
+    }, (error: HttpErrorResponse) => {
       this.signUpFailed = "Something went wrong. Please try again later";
       // below code represent more information about error.We can also use this
       /*if (error.error instanceof ErrorEvent) {
@@ -69,18 +71,24 @@ export class CreateEmployeeComponent implements OnInit {
     //formdata.reset();
   }
   // We use ngClass directive to add or remove multiple css classes on template
-  addOrMultipleClasses(){
+  addOrMultipleClasses() {
     return {
-       boldClass : this.applyBoldClass,
-       italicClass : this.applyItalicClass,
-       normalClass : this.applyNormalClass,
+      boldClass: this.applyBoldClass,
+      italicClass: this.applyItalicClass,
+      normalClass: this.applyNormalClass,
     };
   }
-  addOrMultipleStyle(){
+  addOrMultipleStyle() {
     return {
-      'background-color':  this.addStyle ? "green" : "red",
+      'background-color': this.addStyle ? "green" : "red",
       'font-size': '25px',
       'font-weight': 'bold'
-      }
+    }
+  }
+
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+ 
   }
 }

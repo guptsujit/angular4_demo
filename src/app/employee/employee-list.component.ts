@@ -1,21 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EmployeeService } from './employee.service';
 import { Employee } from '../models/employee-model';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeListResolveServiceGuard } from '../employee/employee-list-resolve-service.guard';
+import { AuthService } from '../auth/auth.service';
+import { Subscription } from 'rxjs';
+
+
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css']
 })
-export class EmployeeListComponent implements OnInit {
+export class EmployeeListComponent implements OnInit, OnDestroy {
   employees: Employee[];
   viewempid: number;
   private _searchTxt: string;
   filteredEmployees: Employee[];
-
   deleteMessage: string = '';
-  constructor(private _employeeService: EmployeeService, private _route: ActivatedRoute, private _resolveGuard: EmployeeListResolveServiceGuard) {
+
+  userisAuthenticated: boolean = false;
+  authStatusListSub: Subscription;
+
+  constructor(private _employeeService: EmployeeService, private _route: ActivatedRoute,
+    private _resolveGuard: EmployeeListResolveServiceGuard,
+    private _authService: AuthService
+  ) {
     this.employees = this._route.snapshot.data['listofemployee'];
     this.filteredEmployees = this.employees;
   }
@@ -42,7 +52,15 @@ export class EmployeeListComponent implements OnInit {
       })
     });*/
 
+    // check user is authenticated or not
+    this.authStatusListSub = this._authService.getAuthStatusListener().subscribe((isAuthenticated) => {
+    
+      this.userisAuthenticated = isAuthenticated;
+    })
 
+  }
+  ngOnDestroy() {
+    this.authStatusListSub.unsubscribe();
   }
   changeEmployeeName() {
     this.employees[0].fullname = "Rishabh Singh";

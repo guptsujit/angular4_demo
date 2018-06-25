@@ -18,7 +18,8 @@ export class EmployeeService {
       copntactpreference: 'email',
       dob: new Date('04/01/1991'),
       department: '2',
-      isactive: false
+      isactive: false,
+      profileImage : null
     }, {
       id: 2,
       fullname: 'rishank singh',
@@ -28,7 +29,8 @@ export class EmployeeService {
       copntactpreference: 'phone',
       dob: new Date('04/01/1990'),
       department: '2',
-      isactive: false
+      isactive: false,
+      profileImage : null
     }, {
       id: 3,
       fullname: 'simple bhatia',
@@ -38,7 +40,8 @@ export class EmployeeService {
       copntactpreference: 'email',
       dob: new Date('04/01/1990'),
       department: '4',
-      isactive: false
+      isactive: false,
+      profileImage : null
     }
   ];
   httpOptions = {
@@ -74,7 +77,7 @@ export class EmployeeService {
   //get post from node backend and display it on home component
   getPostDetail(): Observable<{ post: string, date: Date }> {
     let url = "http://localhost:3000/api/getpost";
-    return this._httpClient.get<{ post: string, date: Date }>(url, this.httpOptions);
+    return this._httpClient.get<{ post: string, date: Date }>(url);
   }
 
   //Post data to node backend 

@@ -1,11 +1,30 @@
-
 <div class="container">
 
-<div class="alert alert-danger" *ngIf='signUpFailed'>
+  <div class="alert alert-danger" *ngIf='signUpFailed'>
     {{signUpFailed}}
   </div>
   <form class="well form-horizontal" action=" " method="post" id="contact_form" #employeeForm="ngForm" (ngSubmit)="processEmployeeForm(employeeForm)">
     <fieldset>
+    
+
+      <div class="form-group" [class.has-error]="profileImageControl.invalid && profileImageControl.touched" [class.has-success]="profileImageControl.valid && profileImageControl.touched">
+        <label class="col-md-4 control-label">Choose File</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+           
+              <input type="file"  name="profileImage"  id="file"  [(ngModel)]="empmodel.profileImage" (change)="handleFileInput($event.target.files)" #profileImageControl>
+          </div>
+          <span class="help-block" *ngIf="profileImageControl.invalid && profileImageControl.touched">Profile image is required</span>
+          <div>
+
+          </div>
+        </div>
+      </div>
+
+
 
 
       <div class="form-group" [class.has-error]="fullnameControl.invalid && fullnameControl.touched" [class.has-success]="fullnameControl.valid && fullnameControl.touched">
@@ -29,11 +48,9 @@
 
 
       <!--Password and confirm password add here -->
-      {{passwordGroupControl.errors | json}}
-      {{passwordControl.errors | json}}
-      <div ngModelGroup #passwordGroupControl ="ngModelGroup" appConfirmEqualValidator 
-      [class.has-error]="passwordGroupControl.errors?.notEqual" [class.has-success]="passwordGroupControl.valid"
-      >
+      {{passwordGroupControl.errors | json}} {{passwordControl.errors | json}}
+      <div ngModelGroup #passwordGroupControl="ngModelGroup" appConfirmEqualValidator [class.has-error]="passwordGroupControl.errors?.notEqual"
+        [class.has-success]="passwordGroupControl.valid">
         <div class="form-group" [class.has-error]="passwordControl.invalid && passwordControl.touched" [class.has-success]="passwordControl.valid">
           <label class="col-md-4 control-label">Password</label>
           <div class="col-md-4 inputGroupContainer">
@@ -196,12 +213,12 @@
       <div class="form-group">
         <label class="col-md-4 control-label"></label>
         <div class="col-md-4">
-          <button type="submit" class="btn btn-warning"  [class]="classesToApply">Submit
-            <span class="glyphicon glyphicon-send" [ngClass] = "addOrMultipleClasses()"></span>
+          <button type="submit" class="btn btn-warning" [class]="classesToApply">Submit
+            <span class="glyphicon glyphicon-send" [ngClass]="addOrMultipleClasses()"></span>
           </button>
           &nbsp;
           <button type="button" class="btn btn-warning" [style.font-size.px]="styleToApply">Cancel
-            <span class="glyphicon glyphicon-send" [ngStyle] ="addOrMultipleStyle()"></span>
+            <span class="glyphicon glyphicon-send" [ngStyle]="addOrMultipleStyle()"></span>
           </button>
         </div>
       </div>

@@ -1,0 +1,48 @@
+
+<div class="container">
+  <form class="well form-horizontal"  method="post" id="login_form" #formData="ngForm" (ngSubmit)="processLoginForm(formData)">
+    <div class="form-group" [class.has-error]="emailControl.invalid && (emailControl.touched || emailControl.dirty || formData.submitted)" [class.has-success]="emailControl.valid && emailControl.touched && emailControl.pristine">
+      <label class="col-md-4 control-label">Email</label>
+      <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-user"></i>
+          </span>
+          <input [(ngModel)]="email" name="email" required placeholder="email" class="form-control" type="text" #emailControl="ngModel"
+           >
+
+        </div>
+        <span class="help-block" *ngIf="emailControl.invalid && (emailControl.touched || emailControl.dirty || formData.submitted)">Email is required</span>
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="passwordControl.invalid && (passwordControl.touched || passwordControl.dirty || formData.submitted)" [class.has-success]="passwordControl.valid && passwordControl.touched">
+      <label class="col-md-4 control-label">Password</label>
+      <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-user"></i>
+          </span>
+          <input [(ngModel)]="password" name="password" required placeholder="Password" class="form-control" type="text" #passwordControl="ngModel">
+
+        </div>
+        <span class="help-block" *ngIf="passwordControl.invalid && (passwordControl.touched || passwordControl.dirty || formData.submitted)">Password is required</span>
+        <div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button type="submit" class="btn btn-warning">login <span class="glyphicon glyphicon-send"></span></button>
+  </div>
+</div>
+</form>
+</div>

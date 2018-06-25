@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -20,12 +20,13 @@ import { EmployeeListComponent } from './employee/employee-list.component';
 import { EmployeeService } from './employee/employee.service';
 import { ViewEmployeeComponent } from './employee/view-employee.component';
 import { EmployeeFilterPipe } from './employee/employee-filter.pipe';
-
+import { LoginComponent } from './auth/login.component';
+import { AuthInterceptor } from './auth/authInterceptor';
 const appRoute: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
   { path: 'employeelist', component: EmployeeListComponent,
-    resolve : {listofemployee : EmployeeListResolveServiceGuard}
+    resolve : {listofemployee : EmployeeListResolveServiceGuard},canActivate:[EmpployeeDetailGuardServiceGuard] 
   },
   { path: 'viewemployee/:id', component: ViewEmployeeComponent,
    canActivate:[EmpployeeDetailGuardServiceGuard] 
@@ -35,6 +36,7 @@ const appRoute: Routes = [
     canDeactivate:[CreateEmployeeCanDeactivateGuardServiceGuard] 
    
   },
+  { path: 'login', component: LoginComponent },
   { path: 'notfound', component: NotfoundComponent },
   { path: '**', redirectTo: '/notfound', pathMatch: 'full'},
 ]
@@ -51,7 +53,8 @@ const appRoute: Routes = [
     ConfirmEqualValidatorDirective,
     EmployeeListComponent,
     ViewEmployeeComponent,
-    EmployeeFilterPipe
+    EmployeeFilterPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoute),FormsModule,
@@ -61,7 +64,7 @@ const appRoute: Routes = [
   providers: [CreateEmployeeCanDeactivateGuardServiceGuard,
              EmployeeService,EmployeeListResolveServiceGuard,
              EmpployeeDetailGuardServiceGuard,
-
+             {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }   
             ],
   bootstrap: [AppComponent]
 })

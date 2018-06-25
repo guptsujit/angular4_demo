@@ -61,7 +61,8 @@
                 </li>
                 <li><a class="main-link" routerLink="/employeelist">Employee List</a></li>
                 <li><a class="main-link" routerLink = '/create'>Add Employee</a></li>
-             
+                <li *ngIf="!userisAuthenticated"><a class="main-link" routerLink = '/login' >Login</a></li>
+                <li  *ngIf="userisAuthenticated"><button (click) = 'logout()' class="main-link">Logout</button></li>
               </ul>
             </div>
             <!-- /.navbar-collapse --> 

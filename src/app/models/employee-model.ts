@@ -9,5 +9,6 @@ export class Employee{
     dob:Date;
     department:string;
     isactive:boolean;
+    profileImage:File;
 
 } 
