@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Event, Router, NavigationStart, NavigationEnd ,NavigationCancel} from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Event, Router, NavigationStart, NavigationEnd, NavigationCancel } from '@angular/router';
+import { AuthService } from './auth/auth.service';
 
 
 @Component({
@@ -7,10 +8,10 @@ import { Event, Router, NavigationStart, NavigationEnd ,NavigationCancel} from '
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   showLoaderIndicator = true;
   aboutus: string = "About Our Team";
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private _authService: AuthService) {
     this._router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {
         if (routerEvent.url == '/employeelist') {
@@ -24,5 +25,9 @@ export class AppComponent {
         this.showLoaderIndicator = false;
       }
     });
+  }
+
+  ngOnInit() {
+    this._authService.autoAuthUser();
   }
 }

@@ -9,7 +9,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { CreateEmployeeComponent } from './employee/create-employee.component';
-import {FormsModule } from '@angular/forms';
+import {FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SelectListValidatorDirective } from './custom_validator/select-list-validator.directive';
 import { ConfirmEqualValidatorDirective } from './custom_validator/confirm-equal-validator.directive';
@@ -22,6 +22,8 @@ import { ViewEmployeeComponent } from './employee/view-employee.component';
 import { EmployeeFilterPipe } from './employee/employee-filter.pipe';
 import { LoginComponent } from './auth/login.component';
 import { AuthInterceptor } from './auth/authInterceptor';
+import { ErrorInterceptor } from './errorInterceptor';
+import { ContactusComponent } from './contactus/contactus.component';
 const appRoute: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
@@ -37,6 +39,7 @@ const appRoute: Routes = [
    
   },
   { path: 'login', component: LoginComponent },
+  { path: 'contactus', component: ContactusComponent },
   { path: 'notfound', component: NotfoundComponent },
   { path: '**', redirectTo: '/notfound', pathMatch: 'full'},
 ]
@@ -54,17 +57,19 @@ const appRoute: Routes = [
     EmployeeListComponent,
     ViewEmployeeComponent,
     EmployeeFilterPipe,
-    LoginComponent
+    LoginComponent,
+    ContactusComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoute),FormsModule,
     BsDatepickerModule.forRoot(),
-    DatepickerModule.forRoot(),HttpClientModule 
+    DatepickerModule.forRoot(),HttpClientModule,ReactiveFormsModule 
   ],
   providers: [CreateEmployeeCanDeactivateGuardServiceGuard,
              EmployeeService,EmployeeListResolveServiceGuard,
              EmpployeeDetailGuardServiceGuard,
-             {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }   
+             {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+             {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }     
             ],
   bootstrap: [AppComponent]
 })
