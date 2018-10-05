@@ -24,6 +24,8 @@ import { LoginComponent } from './auth/login.component';
 import { AuthInterceptor } from './auth/authInterceptor';
 import { ErrorInterceptor } from './errorInterceptor';
 import { ContactusComponent } from './contactus/contactus.component';
+import { TestComponent } from './employee/test.component';
+
 const appRoute: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
@@ -58,7 +60,8 @@ const appRoute: Routes = [
     ViewEmployeeComponent,
     EmployeeFilterPipe,
     LoginComponent,
-    ContactusComponent
+    ContactusComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(appRoute),FormsModule,

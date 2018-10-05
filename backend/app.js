@@ -38,9 +38,11 @@ app.post('/api/user/login', (req, res, next) => {
     const data = req.body;
     // for now lets assume password is matched from the database
     if (true) {
-        const token = jwt.sign({ email: data.email }, "This should be a longer string", { expiresIn: 50})
+      //  const token = jwt.sign({ email: data.email }, "This should be a longer string", { expiresIn: 50})
+        const token = jwt.sign({ email: data.email }, "This should be a longer string", { expiresIn: '1h'})
         res.status(200).json({ token: token,expiresIn:50 });
     }
 
 })
 module.exports = app;
+

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../models/employee-model';
-import { Observable, of } from 'rxjs';
+import { Observable, of,forkJoin } from 'rxjs';
 import { delay, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -54,7 +55,9 @@ export class EmployeeService {
 
   backendURl: string = environment.apiURl;
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) {
+
+   }
 
   getEmployees(): Observable<Employee[]> {
     let saveurl = this.backendURl + "db.php?action=get_emp";
@@ -85,5 +88,31 @@ export class EmployeeService {
     let post = { post: "This is first post coming from angular", date: new Date() };
     let url = "http://localhost:3000/api/savepost";
     return this._httpClient.post<{ message: string}>(url,post,this.httpOptions);
+  }
+
+  //Executing multiple concurrent HTTP requests
+   getResult(){
+    let employeeid = 7;
+    let empDetaillUrl = this.backendURl + "db.php?action=get_emp_detail&id=" + employeeid;
+    let url1 = this._httpClient.get(empDetaillUrl, this.httpOptions);
+    let url2 = this._httpClient.get(this.backendURl + "db.php?action=get_emp", this.httpOptions);
+
+
+// example emmiting multiple data from observable over a period of time
+    /*const simpleObservable = new Observable((observer) => {
+      // observable execution
+      observer.next("sujit1");
+      observer.next("sujit2");
+      observer.next("sujit3");
+      observer.complete()
+  })
+  simpleObservable.subscribe((data)=>{
+    console.log(data);
+  })*/
+  
+    //return forkJoin([url1,url2]);
+    //this will also work
+    return forkJoin(url1,url2);;
+   
   }
 }

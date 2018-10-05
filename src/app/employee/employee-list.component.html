@@ -3,8 +3,19 @@
   
 <input type="text" [(ngModel)]="SearchTerm">
 &nbsp;
+<input type="text" name="companyName" [(ngModel)]="companyName">
+
+<app-test [companyName] = "companyName" [profile] = "profile">
+  <h1 content1>{{"hello India1" +companyName }}</h1> 
+  <h1 content2>{{"hello India2" +companyName }}</h1> 
+</app-test>
+
+&nbsp;
 <button class="main-link"   (click) = "changeEmployeeName()" class="btn btn-info">Change Employee Name</button>
 </div>
+<h1>{{firstname}}</h1>
+<h1>{{lastname}}</h1>
+
 <div class="alert alert-danger" *ngIf="deleteMessage">
   {{deleteMessage}}
 </div>
@@ -24,9 +35,9 @@
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor='let employee of filteredEmployees'>
+    <ng-container *ngFor='let employee of filteredEmployees let i=index;let c=count;let o=odd;let e=even;'>
       <tr  [class.changecolor]="viewempid===employee.id">
-      <td>{{employee.fullname}}</td>
+      <td>{{e}}</td>
       <td>{{employee.gender}}</td>
       <td>{{employee.email}}</td>
       <td>{{employee.phoneno}}</td>

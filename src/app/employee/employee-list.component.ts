@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,OnChanges,SimpleChanges ,Input} from '@angular/core';
 import { EmployeeService } from './employee.service';
 import { Employee } from '../models/employee-model';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeListResolveServiceGuard } from '../employee/employee-list-resolve-service.guard';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
-
+import {PageEvent} from '@angular/material';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,6 +13,19 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit, OnDestroy {
+
+  // MatPaginator Inputs
+  length = 100;
+  pageSize = 1;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  // MatPaginator Output
+  pageEvent: PageEvent;
+
+  //change detection example
+  firstname : string = "Sujit";
+  companyName : string;
+  profile : any={name:"sujit",age:27};
   employees: Employee[];
   viewempid: number;
   private _searchTxt: string;
@@ -28,9 +41,21 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   ) {
     this.employees = this._route.snapshot.data['listofemployee'];
     this.filteredEmployees = this.employees;
+
+
   }
 
   ngOnInit() {
+
+    setTimeout(() => {
+      this.firstname = 'Angular';
+     
+    }, 4000);
+ // subscribe getResult method of service 
+this._employeeService.getResult().subscribe((data)=>{
+     console.dir(data);
+   });
+
     //this.viewempid = +this._route.snapshot.paramMap.get('id');
 
     //snapshot approach
@@ -63,6 +88,10 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     this.authStatusListSub.unsubscribe();
   }
   changeEmployeeName() {
+    this.profile.age = 28;
+    let obj = Object.assign({}, this.profile);
+    obj.age = 28;
+    this.profile =  obj.age;
     this.employees[0].fullname = "Rishabh Singh";
     //this will run for pure pipe as well because we are creating brand new employee here
     //this.filteredEmployees = Object.assign([],this.employees);
@@ -103,4 +132,11 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+
+
+ getServerData(pageEvent){
+  console.log(pageEvent);
+ }
+
 }
